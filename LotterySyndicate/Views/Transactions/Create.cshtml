@@ -17,7 +17,7 @@
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
         <div class="form-group" >
-            @Html.LabelFor(model => model.UserEmail, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.UserEmail, "User", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.UserEmail, new { htmlAttributes = new { @class = "form-control", @Value = @User.Identity.Name, @readonly = "readonly"} })
                 @Html.ValidationMessageFor(model => model.UserEmail, "", new { @class = "text-danger" })
@@ -25,15 +25,15 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.NumberOfTickets, htmlAttributes: new {@class = "control-label col-md-2" })
-            <div class="col-md-10" id="quantity">
-                @Html.EditorFor(model => model.NumberOfTickets, new { htmlAttributes = new { @class = "form-control", @id = "quantity", @onchange = "calculateAmount()" } })
+            @Html.LabelFor(model => model.NumberOfTickets, "Number of Tickets", htmlAttributes: new {@class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.NumberOfTickets, new { htmlAttributes = new { @class = "form-control", @type = "number", @id = "quantity", @placeholder = "Quantity", @onchange = "calculateAmount()" } })
                 @Html.ValidationMessageFor(model => model.NumberOfTickets, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Amount, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Amount, "Amount (£)", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Amount, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", @id="amount"} })
                 @Html.ValidationMessageFor(model => model.Amount, "", new { @class = "text-danger" })
@@ -55,7 +55,7 @@
 <script type="text/javascript">
     function calculateAmount() {
         var x = document.getElementById("quantity").value;
-        document.getElementById("amount").value = Number(x);
+        document.getElementById("amount").value = (x * 2);
     }
 </script>
 
