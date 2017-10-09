@@ -1,0 +1,39 @@
+﻿@model IEnumerable<LotterySyndicate.Ticket>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Code1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Code2)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Code1)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Code2)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.TicketID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.TicketID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.TicketID })
+        </td>
+    </tr>
+}
+
+</table>
