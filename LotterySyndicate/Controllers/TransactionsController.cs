@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using LotterySyndicate;
+using Newtonsoft.Json;
 
 namespace LotterySyndicate.Controllers
 {
@@ -17,7 +18,10 @@ namespace LotterySyndicate.Controllers
         // GET: Transactions
         public ActionResult Index()
         {
+
             return View(db.Transactions.ToList());
+
+        
         }
 
         // GET: Transactions/Details/5
@@ -33,6 +37,16 @@ namespace LotterySyndicate.Controllers
                 return HttpNotFound();
             }
             return View(transaction);
+        }
+
+        //GET: Get all transactions and sort
+        public ActionResult ListAndSort()
+        {
+            string query = "SELECT * FROM Transactions";
+            var data = db.Transactions.SqlQuery(query);
+
+            return View(data.ToList());
+
         }
 
         // GET: Transactions/Create
