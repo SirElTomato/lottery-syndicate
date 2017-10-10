@@ -19,9 +19,18 @@ namespace LotterySyndicate.Controllers
 
         public IHttpActionResult Get()
         {
+      
+            var ticketsPerUser = from transaction in db.Transactions
+                                 group transaction by transaction.UserEmail 
+                                 into individual select new
+                                 {
+                                     User = individual.Key,
+                                     TicketCount = individual.Sum(x => x.NumberOfTickets),
+                                 };
 
+            //select sum(NumberOfTickets) from dbo.Transactions group by UserEmail;
 
-            return Ok(db.Transactions);
+            return Ok(ticketsPerUser);
 
         }
 
