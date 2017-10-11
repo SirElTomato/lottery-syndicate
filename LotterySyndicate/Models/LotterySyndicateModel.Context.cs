@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace LotterySyndicate
+namespace LotterySyndicate.Models
 {
     using System;
     using System.Data.Entity;

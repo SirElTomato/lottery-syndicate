@@ -7,15 +7,16 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace LotterySyndicate
+namespace LotterySyndicate.Models
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Ticket
+    public partial class Transaction
     {
-        public int TicketID { get; set; }
-        public Nullable<int> Code1 { get; set; }
-        public Nullable<int> Code2 { get; set; }
+        public int TransactionID { get; set; }
+        public string UserEmail { get; set; }
+        public Nullable<int> NumberOfTickets { get; set; }
+        public Nullable<decimal> Amount { get; set; }
     }
 }

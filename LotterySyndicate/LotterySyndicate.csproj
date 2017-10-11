@@ -195,43 +195,45 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="LotterySyndicateModel.Context.cs">
+    <Compile Include="Models\LotterySyndicateModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>LotterySyndicateModel.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="LotterySyndicateModel.cs">
+    <Compile Include="Models\LotterySyndicateModel.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>LotterySyndicateModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="LotterySyndicateModel.Designer.cs">
+    <Compile Include="Models\LotterySyndicateModel.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>LotterySyndicateModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
-    <Compile Include="Ticket.cs">
+    <Compile Include="Models\Ticket.cs">
       <DependentUpon>LotterySyndicateModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Transaction.cs">
+    <Compile Include="Models\Transaction.cs">
       <DependentUpon>LotterySyndicateModel.tt</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\asterGraph.css" />
+    <Content Include="Content\barChart.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="LotterySyndicateModel.Context.tt">
+    <Content Include="Models\LotterySyndicateModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>LotterySyndicateModel.Context.cs</LastGenOutput>
       <DependentUpon>LotterySyndicateModel.edmx</DependentUpon>
     </Content>
-    <Content Include="LotterySyndicateModel.tt">
+    <Content Include="Models\LotterySyndicateModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>LotterySyndicateModel.edmx</DependentUpon>
       <LastGenOutput>LotterySyndicateModel.cs</LastGenOutput>
@@ -241,14 +243,18 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <EntityDeploy Include="LotterySyndicateModel.edmx">
+    <EntityDeploy Include="Models\LotterySyndicateModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>LotterySyndicateModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="LotterySyndicateModel.edmx.diagram">
+    <Content Include="Models\LotterySyndicateModel.edmx.diagram">
       <DependentUpon>LotterySyndicateModel.edmx</DependentUpon>
     </Content>
+    <Content Include="Content\data.csv" />
+    <Content Include="Content\data.json" />
+    <Content Include="Content\data.tsv" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\importData.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -259,6 +265,7 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\ticketsPerUserGraph.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -285,10 +292,11 @@
     <Content Include="Views\Transactions\Details.cshtml" />
     <Content Include="Views\Transactions\Edit.cshtml" />
     <Content Include="Views\Transactions\Index.cshtml" />
+    <Content Include="Views\Transactions\ListAndSort.cshtml" />
+    <Content Include="Views\Transactions\GetTotals.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

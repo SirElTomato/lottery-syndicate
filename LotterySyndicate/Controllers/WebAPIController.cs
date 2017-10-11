@@ -1,5 +1,7 @@
-﻿using System;
+﻿using LotterySyndicate.Models;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -19,16 +21,18 @@ namespace LotterySyndicate.Controllers
 
         public IHttpActionResult Get()
         {
-      
+
             var ticketsPerUser = from transaction in db.Transactions
-                                 group transaction by transaction.UserEmail 
-                                 into individual select new
+                                 group transaction by transaction.UserEmail
+                                 into individual
+                                 select new
                                  {
                                      User = individual.Key,
                                      TicketCount = individual.Sum(x => x.NumberOfTickets),
+                                     AmountCount = individual.Sum(x => x.Amount),
                                  };
 
-            //select sum(NumberOfTickets) from dbo.Transactions group by UserEmail;
+
 
             return Ok(ticketsPerUser);
 

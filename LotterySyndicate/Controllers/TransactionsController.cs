@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using LotterySyndicate;
 using Newtonsoft.Json;
+using LotterySyndicate.Models;
 
 namespace LotterySyndicate.Controllers
 {
@@ -39,15 +40,46 @@ namespace LotterySyndicate.Controllers
             return View(transaction);
         }
 
-        //GET: Get all transactions and sort
-        public ActionResult ListAndSort()
+
+        public ActionResult GetTotals()
         {
-            string query = "SELECT * FROM Transactions";
-            var data = db.Transactions.SqlQuery(query);
 
-            return View(data.ToList());
+            //string query = "select sum(NumberOfTickets), sum(Amount) from dbo.Transactions group by UserEmail";
+            //var data = db.Transactions.SqlQuery(query);
 
+            var ticketsPerUser = from transaction in db.Transactions
+                                 group transaction by transaction.UserEmail
+                                 into individual
+                                 select new
+                                 {
+                                     User = individual.Key,
+                                     TicketCount = individual.Sum(x => x.NumberOfTickets),
+                                     AmountCount = individual.Sum(x => x.Amount),
+                                 };
+
+            return View(ticketsPerUser);
+            //return PartialView(data.ToList());
         }
+
+
+
+        // model for total transactions, can create a new TotalTransactions in the actionresult and fill it with the data and then return the model instead of the data 
+        //public class TotalsTransactions
+        //{
+        //    public string query { get; set; }
+        //    public string data { get; set; }
+        //}
+
+
+        //GET: Get all transactions and sort
+        //public ActionResult ListAndSort()
+        //{
+        //    string query = "SELECT * FROM Transactions";
+        //    var data = db.Transactions.SqlQuery(query);
+
+        //    return PartialView(data.ToList());
+
+        //}
 
         // GET: Transactions/Create
         public ActionResult Create()

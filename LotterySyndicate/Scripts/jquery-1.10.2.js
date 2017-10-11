@@ -105,7 +105,8 @@ var
 	rdashAlpha = /-([\da-z])/gi,
 
 	// Used by jQuery.camelCase as callback to replace()
-	fcamelCase = function( all, letter ) {
+	fcamelCase = function( all, 
+ ) {
 		return letter.toUpperCase();
 	},
 
