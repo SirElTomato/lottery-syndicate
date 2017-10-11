@@ -19,6 +19,15 @@ namespace LotterySyndicate.Controllers
         // GET: Transactions
         public ActionResult Index()
         {
+            var query = "SELECT SUM(NumberOfTickets) FROM dbo.transactions";
+            var result = db.Transactions.SqlQuery(query);
+            ViewBag.CompanyTotalTickets = result;
+
+            var totalAmount = db.Transactions.Select(t => t.Amount ?? 0).Sum();
+            var totalTickets = db.Transactions.Select(t => t.NumberOfTickets ?? 0).Sum();
+
+            ViewData["TotalTickets"] = totalTickets;
+            ViewData["TotalAmounr"] = totalAmount;
 
             return View(db.Transactions.ToList());
 

@@ -179,17 +179,13 @@ function barChart()
             .data(data)
             .enter().append("rect")
             .attr("class", "bar")
-            .attr("x", function (d) { return x(d.User); })
+            .attr("x", function (d) { return x(d.User.split(',')[0]); })
             .attr("width", x.rangeBand())
             .attr("y", function (d) { return y(d.AmountCount); })
             .attr("height", function (d) { return height - y(d.AmountCount); });
 
     });
 
-}
-
-function countObjectKeys(obj) {
-    return Object.keys(obj).length;
 }
 
 function asterGraph()

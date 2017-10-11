@@ -1,5 +1,7 @@
 ﻿@model IEnumerable<LotterySyndicate.Models.Transaction>
 
+
+
 @{
     ViewBag.Title = "Index";
 }
@@ -7,17 +9,79 @@
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Purchase", "Create")
-    
-
+    @Html.ActionLink("View all transactions", "ViewAll")
 </p>
 
-<div id="chart"></div> 
+
+<div class="asterGraph col-md-6"></div>
+
+<div class="col-md-6">
+    <table class="table">
+        <tr>
+            <td>
+                Total Tickets in Syndicate
+            </td>
+            <td>
+                @ViewData["TotalTickets"]
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Total Spent
+            </td>
+            <td>
+                @ViewData["TotalAmount"]
+            </td>
+        </tr>
+        <tr>
+            <td>
+                First Prize
+            </td>
+            <td>
+                @*@ViewData["FirstPrize"]*@
+            </td>
+        </tr>
+    </table>
+</div>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.UserEmail)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NumberOfTickets)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Amount)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserEmail)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NumberOfTickets)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Amount)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.TransactionID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.TransactionID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.TransactionID })
+            </td>
+        </tr>
+    }
+</table>
 
 
-<div class="orangeContainer"></div>
 
-<div class="asterGraph"></div>
+
 
 <div class="ticketsPerUser d-inline-block"></div>
 
@@ -53,39 +117,6 @@
 @*@Html.Partial("GetTotals")
 @Html.Partial("ListAndSort")*@
 
-@*<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.UserEmail)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.NumberOfTickets)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Amount)
-        </th>
-        <th></th>
-    </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.UserEmail)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.NumberOfTickets)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Amount)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.TransactionID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.TransactionID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.TransactionID })
-        </td>
-    </tr>
-}
-
-</table>*@
 
 
