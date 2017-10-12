@@ -27,7 +27,7 @@ namespace LotterySyndicate.Controllers
             var totalTickets = db.Transactions.Select(t => t.NumberOfTickets ?? 0).Sum();
 
             ViewData["TotalTickets"] = totalTickets;
-            ViewData["TotalAmounr"] = totalAmount;
+            ViewData["TotalAmount"] = totalAmount;
 
             return View(db.Transactions.ToList());
 

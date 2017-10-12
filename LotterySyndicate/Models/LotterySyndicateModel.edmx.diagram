@@ -7,6 +7,7 @@
       <Diagram DiagramId="ee1bcf26c3d24fd3ab72bb5ce15aa158" Name="Diagram1">
         <EntityTypeShape EntityType="LotterySyndicateModel.Ticket" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="LotterySyndicateModel.Transaction" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LotterySyndicateModel.Prize" Width="1.5" PointX="0.75" PointY="3.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
