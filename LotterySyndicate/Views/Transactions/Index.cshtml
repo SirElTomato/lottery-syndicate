@@ -5,18 +5,15 @@
 @using System.IO;
 
 
-
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Syndicate Dashboard";
     var url = "https://localhost:44327/api/webapi";
     string json = new WebClient().DownloadString(url);
-
-
 
     var assestsPerUser = JsonConvert.DeserializeObject<List<UniqueUsersTransactions>>(json);
 }
 
-<h2>Index</h2>
+<h2>Syndicate Dashboard</h2>
 
 <p>
     @Html.ActionLink("View all transactions", "ShowAll")
@@ -24,7 +21,7 @@
 </p>
 
 
-
+@* Top table and instructions *@
 <div class="col-md-6">
     <p>
         @{
@@ -42,8 +39,8 @@
             }
         }
 
-        <br />
-        <h4>Welcome to the c5 Christmas Lottery Syndicate!</h4>
+        
+        <h4>Welcome to the C5 Christmas Lottery Syndicate!</h4>
         Here you will be able to see:
         <br />
         - How many tickets we collectively own
@@ -56,43 +53,47 @@
     <table class="table">
         <tr>
             <td>
-                <h3>Total Tickets in Syndicate</h3>
+                <h4>Total Tickets in Syndicate</h4>
             </td>
             <td>
-                <h3>@ViewData["TotalTickets"]</h3>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <h3>Total Spent</h3>
-            </td>
-            <td>
-                <h3>@ViewData["TotalAmount"]</h3>
+                <h4>@ViewData["TotalTickets"]</h4>
             </td>
         </tr>
         <tr>
             <td>
-                <h3>First Prize</h3>
+                <h4>Total Spent</h4>
             </td>
             <td>
-                <h3>@ViewData["FirstPrize"]</h3>
+                <h4>£@ViewData["TotalAmount"]</h4>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <h4>First Prize</h4>
+            </td>
+            <td>
+                <h4>£@ViewData["FirstPrize"]</h4>
             </td>
         </tr>
     </table>
 
-    
+    <p>
+        
+        <br />
+        Check out this graph to see how much everyone has spent and the average spend per person
+    </p>
 </div>
 
 <div class="col-md-1"></div>
 
 <div class="asterGraph col-md-5"></div>
 
-<br />
-<br />
+<p>&nbsp;</p> 
+<p>&nbsp;</p>
 
 
-
-<div class="col-md-5">
+@* prize share table *@
+<div class="col-md-5"> 
     <table class="table">
         @{
             <tr>
@@ -141,37 +142,26 @@
 
 <div class="col-md-1"></div>
 
-<div class="horizontalBarChart d-inline-block col-md-6"></div>
+<div class="horizontalBarChart d-inline-block col-md-5"></div>
+
+<p>&nbsp;</p>
 
 
-
-<div class="ticketsPerUser d-inline-block col-md-6"></div>
-
-
-
-
-
-
-
+@*<div class="ticketsPerUser d-inline-block col-md-6"></div>*@
 
 
 <script src="https://d3js.org/d3.v3.min.js"></script>
+<script src="https://d3js.org/d3.v4.min.js"></script>
+
 <script src="https://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
 
-<script src="~/Scripts/ticketsPerUserGraph.js"></script>
+
+<script src="~/Scripts/aster-graph.js"></script>
+<script src="~/Scripts/horizontal-bar-chart.js"></script>
 
 <script>
-
-
-    
-    barChart();
-    horizontalBarChart();
+    //barChart();
+    horizontalBarChart2();
     asterGraph();
-    
 </script>
-
-
-
-
-
 

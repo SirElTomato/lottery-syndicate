@@ -27,6 +27,7 @@ namespace LotterySyndicate
                       "~/Content/bootstrap.css",
                       "~/Content/site.css",
                       "~/Content/barChart.css",
+                      "~/Content/HorizontalBar.css",
                       "~/Content/asterGraph.css"));
         }
     }
