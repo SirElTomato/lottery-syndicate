@@ -8,48 +8,74 @@
 
 @{
     ViewBag.Title = "Index";
+    var url = "https://localhost:44327/api/webapi";
+    string json = new WebClient().DownloadString(url);
+
+
+
+    var assestsPerUser = JsonConvert.DeserializeObject<List<UniqueUsersTransactions>>(json);
 }
 
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink("View all transactions", "ViewAll")
-
-    Your potential winnings are:!!!!
-
-
-
+    @Html.ActionLink("View all transactions", "ShowAll")
+    
 </p>
 
 
 
 <div class="col-md-6">
     <p>
+        @{
+            foreach (var item in assestsPerUser)
+            {
 
+                if (item.User == User.Identity.Name)
+                {
+                    var userAmountDividedByTotalAmount = (item.AmountCount / ViewBag.TotalAmount);
+
+                    var prizeShare = userAmountDividedByTotalAmount * ViewBag.FirstPrize;
+                    <h3>Your Potential Winnings: £@Math.Round(prizeShare, 2)</h3>
+                }
+
+            }
+        }
+
+        <br />
+        <h4>Welcome to the c5 Christmas Lottery Syndicate!</h4>
+        Here you will be able to see:
+        <br />
+        - How many tickets we collectively own
+        <br />
+        - How much money we have collectively spent
+        <br />
+        - Your potential 1st prize winnings compared to the rest of the syndicate participants
     </p>
+    <br />
     <table class="table">
         <tr>
             <td>
-                Total Tickets in Syndicate
+                <h3>Total Tickets in Syndicate</h3>
             </td>
             <td>
-                @ViewData["TotalTickets"]
-            </td>
-        </tr>
-        <tr>
-            <td>
-                Total Spent
-            </td>
-            <td>
-                @ViewData["TotalAmount"]
+                <h3>@ViewData["TotalTickets"]</h3>
             </td>
         </tr>
         <tr>
             <td>
-                First Prize
+                <h3>Total Spent</h3>
             </td>
             <td>
-                @ViewData["FirstPrize"]
+                <h3>@ViewData["TotalAmount"]</h3>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <h3>First Prize</h3>
+            </td>
+            <td>
+                <h3>@ViewData["FirstPrize"]</h3>
             </td>
         </tr>
     </table>
@@ -57,43 +83,13 @@
     
 </div>
 
-<div class="asterGraph col-md-6"></div>
+<div class="col-md-1"></div>
 
+<div class="asterGraph col-md-5"></div>
 
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.UserEmail)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.NumberOfTickets)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Amount)
-        </th>
-        <th></th>
-    </tr>
+<br />
+<br />
 
-    @foreach (var item in Model)
-            {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.UserEmail)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NumberOfTickets)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Amount)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.TransactionID }) |
-                @Html.ActionLink("Details", "Details", new { id = item.TransactionID }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.TransactionID })
-            </td>
-        </tr>
-    }
-</table>
 
 
 <div class="col-md-5">
@@ -111,14 +107,9 @@
                 </th>
             </tr>
 
-            var url = "https://localhost:44327/api/webapi";
-            string json = new WebClient().DownloadString(url);
 
 
-
-            var data = JsonConvert.DeserializeObject<List<UniqueUsersTransactions>>(json);
-
-            foreach (var item in data)
+            foreach (var item in assestsPerUser)
             {
                 <tr>
                     <td>
@@ -150,6 +141,9 @@
 
 <div class="col-md-1"></div>
 
+<div class="horizontalBarChart d-inline-block col-md-6"></div>
+
+
 
 <div class="ticketsPerUser d-inline-block col-md-6"></div>
 
@@ -171,6 +165,7 @@
 
     
     barChart();
+    horizontalBarChart();
     asterGraph();
     
 </script>

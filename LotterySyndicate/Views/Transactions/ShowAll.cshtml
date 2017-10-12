@@ -1,0 +1,43 @@
+﻿@model IEnumerable<LotterySyndicate.Models.Transaction>
+
+@{
+    ViewBag.Title = "All Transactions";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>All Transactions</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.UserEmail)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NumberOfTickets)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Amount)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+            {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserEmail)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NumberOfTickets)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Amount)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.TransactionID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.TransactionID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.TransactionID })
+            </td>
+        </tr>
+    }
+</table>

@@ -41,6 +41,12 @@ namespace LotterySyndicate.Controllers
         
         }
 
+        public ActionResult ShowAll()
+        {
+           
+            return View(db.Transactions.ToList());
+        }
+
         // GET: Transactions/Details/5
         public ActionResult Details(int? id)
         {

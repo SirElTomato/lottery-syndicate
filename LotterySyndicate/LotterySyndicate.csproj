@@ -304,6 +304,7 @@
     <Content Include="Views\Prizes\Details.cshtml" />
     <Content Include="Views\Prizes\Edit.cshtml" />
     <Content Include="Views\Prizes\Index.cshtml" />
+    <Content Include="Views\Transactions\ShowAll.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

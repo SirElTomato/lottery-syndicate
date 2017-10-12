@@ -11,12 +11,16 @@ namespace LotterySyndicate.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+
     public partial class Transaction
     {
         public int TransactionID { get; set; }
+        [DisplayName("Name")]
         public string UserEmail { get; set; }
+        [DisplayName("Number of Tickets")]
         public Nullable<int> NumberOfTickets { get; set; }
+        [DisplayName("Amount (£)")]
         public Nullable<decimal> Amount { get; set; }
     }
 }
