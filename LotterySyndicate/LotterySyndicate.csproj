@@ -189,7 +189,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\PrizeController.cs" />
+    <Compile Include="Controllers\PrizesController.cs" />
     <Compile Include="Controllers\TicketsController.cs" />
     <Compile Include="Controllers\TransactionsController.cs" />
     <Compile Include="Controllers\WebAPIController.cs" />
@@ -214,6 +214,7 @@
     <Compile Include="Models\Prize.cs">
       <DependentUpon>LotterySyndicateModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\UniqueUsersTransactions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Models\Ticket.cs">
@@ -298,6 +299,11 @@
     <Content Include="Views\Transactions\Index.cshtml" />
     <Content Include="Views\Transactions\ListAndSort.cshtml" />
     <Content Include="Views\Transactions\GetTotals.cshtml" />
+    <Content Include="Views\Prizes\Create.cshtml" />
+    <Content Include="Views\Prizes\Delete.cshtml" />
+    <Content Include="Views\Prizes\Details.cshtml" />
+    <Content Include="Views\Prizes\Edit.cshtml" />
+    <Content Include="Views\Prizes\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -27,5 +27,6 @@ namespace LotterySyndicate.Models
     
         public virtual DbSet<Ticket> Tickets { get; set; }
         public virtual DbSet<Transaction> Transactions { get; set; }
+        public virtual DbSet<Prize> Prizes { get; set; }
     }
 }

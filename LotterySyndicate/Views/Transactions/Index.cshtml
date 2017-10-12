@@ -1,4 +1,8 @@
 ﻿@model IEnumerable<LotterySyndicate.Models.Transaction>
+@using Newtonsoft.Json;
+@using LotterySyndicate.Models;
+@using System.Net;
+@using System.IO;
 
 
 
@@ -10,12 +14,19 @@
 
 <p>
     @Html.ActionLink("View all transactions", "ViewAll")
+
+    Your potential winnings are:!!!!
+
+
+
 </p>
 
 
-<div class="asterGraph col-md-6"></div>
 
 <div class="col-md-6">
+    <p>
+
+    </p>
     <table class="table">
         <tr>
             <td>
@@ -38,11 +49,16 @@
                 First Prize
             </td>
             <td>
-                @*@ViewData["FirstPrize"]*@
+                @ViewData["FirstPrize"]
             </td>
         </tr>
     </table>
+
+    
 </div>
+
+<div class="asterGraph col-md-6"></div>
+
 
 <table class="table">
     <tr>
@@ -59,7 +75,7 @@
     </tr>
 
     @foreach (var item in Model)
-    {
+            {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.UserEmail)
@@ -80,14 +96,65 @@
 </table>
 
 
+<div class="col-md-5">
+    <table class="table">
+        @{
+            <tr>
+                <th>
+
+                </th>
+                <th>
+                    Ticket Share (%)
+                </th>
+                <th>
+                    Prize Share (£)
+                </th>
+            </tr>
+
+            var url = "https://localhost:44327/api/webapi";
+            string json = new WebClient().DownloadString(url);
 
 
 
-<div class="ticketsPerUser d-inline-block"></div>
+            var data = JsonConvert.DeserializeObject<List<UniqueUsersTransactions>>(json);
+
+            foreach (var item in data)
+            {
+                <tr>
+                    <td>
+                        @{
+                            int indexAt = item.User.IndexOf('@');
+                            int indexDot = item.User.IndexOf('.');
+                            string name = item.User.Substring(0, indexDot) + " " + item.User.Substring((indexDot + 1), (indexAt - (indexDot + 1)));
+                        }
+                        @name
+                    </td>
+                    <td>
+                        @{
+                            var userAmountDividedByTotalAmount = (item.AmountCount / ViewBag.TotalAmount);
+                            var percentageUserAmountDividedByTotalAmount = userAmountDividedByTotalAmount * 100;
+                        }
+                        @Math.Round(percentageUserAmountDividedByTotalAmount, 2)
+                    </td>
+                    <td>
+                        @{
+                            var prizeShare = userAmountDividedByTotalAmount * ViewBag.FirstPrize;
+                        }
+                        @Math.Round(prizeShare, 2)
+                    </td>
+                </tr>
+                            }
+        }
+    </table>
+</div>
+
+<div class="col-md-1"></div>
+
+
+<div class="ticketsPerUser d-inline-block col-md-6"></div>
 
 
 
-<svg width="960" height="500"></svg>
 
 
 
@@ -102,20 +169,13 @@
 <script>
 
 
-    //svgExample();
-    //visualiseOranges();
-    importData();
+    
     barChart();
     asterGraph();
     
 </script>
 
 
-
-
-
-@*@Html.Partial("GetTotals")
-@Html.Partial("ListAndSort")*@
 
 
 

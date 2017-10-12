@@ -15,6 +15,7 @@ namespace LotterySyndicate.Controllers
     public class TransactionsController : Controller
     {
         private LotterySyndicateEntities db = new LotterySyndicateEntities();
+       
 
         // GET: Transactions
         public ActionResult Index()
@@ -25,9 +26,15 @@ namespace LotterySyndicate.Controllers
 
             var totalAmount = db.Transactions.Select(t => t.Amount ?? 0).Sum();
             var totalTickets = db.Transactions.Select(t => t.NumberOfTickets ?? 0).Sum();
+            var firstPrize = db.Prizes.Select(p => p.Value).ToList();
 
             ViewData["TotalTickets"] = totalTickets;
-            ViewData["TotalAmount"] = totalAmount;
+            ViewBag.TotalAmount = (int)totalAmount;
+            ViewBag.FirstPrize = (int)firstPrize[0];
+            
+
+            
+
 
             return View(db.Transactions.ToList());
 
@@ -50,45 +57,31 @@ namespace LotterySyndicate.Controllers
         }
 
 
-        public ActionResult GetTotals()
-        {
-
-            //string query = "select sum(NumberOfTickets), sum(Amount) from dbo.Transactions group by UserEmail";
-            //var data = db.Transactions.SqlQuery(query);
-
-            var ticketsPerUser = from transaction in db.Transactions
-                                 group transaction by transaction.UserEmail
-                                 into individual
-                                 select new
-                                 {
-                                     User = individual.Key,
-                                     TicketCount = individual.Sum(x => x.NumberOfTickets),
-                                     AmountCount = individual.Sum(x => x.Amount),
-                                 };
-
-            return View(ticketsPerUser);
-            //return PartialView(data.ToList());
-        }
-
-
-
-        // model for total transactions, can create a new TotalTransactions in the actionresult and fill it with the data and then return the model instead of the data 
-        //public class TotalsTransactions
+        //public ActionResult GetTotals()
         //{
-        //    public string query { get; set; }
-        //    public string data { get; set; }
+
+        //    //string query = "select sum(NumberOfTickets), sum(Amount) from dbo.Transactions group by UserEmail";
+        //    //var data = db.Transactions.SqlQuery(query);
+
+        //    var ticketsPerUser = from transaction in db.Transactions
+        //                         group transaction by transaction.UserEmail
+        //                         into individual
+        //                         select new
+        //                         {
+        //                             User = individual.Key,
+        //                             TicketCount = individual.Sum(x => x.NumberOfTickets),
+        //                             AmountCount = individual.Sum(x => x.Amount),
+        //                         };
+
+        //    return View(ticketsPerUser);
+        //    //return PartialView(data.ToList());
         //}
 
 
-        //GET: Get all transactions and sort
-        //public ActionResult ListAndSort()
-        //{
-        //    string query = "SELECT * FROM Transactions";
-        //    var data = db.Transactions.SqlQuery(query);
 
-        //    return PartialView(data.ToList());
+        
 
-        //}
+    
 
         // GET: Transactions/Create
         public ActionResult Create()
