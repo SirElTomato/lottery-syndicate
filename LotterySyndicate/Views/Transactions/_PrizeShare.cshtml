@@ -1,0 +1,67 @@
+﻿@using Newtonsoft.Json;
+@using LotterySyndicate.Models;
+
+
+@{
+    var url = "https://localhost:44327/api/webapi";
+    string json = new WebClient().DownloadString(url);
+
+    var assestsPerUser = JsonConvert.DeserializeObject<List<UniqueUsersTransactions>>(json);
+}
+
+@* prize share table *@
+<div class="col-md-5">
+    <table class="table">
+        @{
+        <tr>
+            <th>
+
+            </th>
+            <th>
+                Ticket Share (%)
+            </th>
+            <th>
+                Prize Share (£)
+            </th>
+        </tr>
+
+
+
+        foreach (var item in assestsPerUser)
+        {
+        <tr>
+            <td>
+                @{
+                int indexAt = item.User.IndexOf('@');
+                int indexDot = item.User.IndexOf('.');
+                string name = item.User.Substring(0, indexDot) + " " + item.User.Substring((indexDot + 1), (indexAt - (indexDot + 1)));
+                }
+                @name
+            </td>
+            <td>
+                @{
+                var userAmountDividedByTotalAmount = (item.AmountCount / ViewBag.TotalAmount);
+                var percentageUserAmountDividedByTotalAmount = userAmountDividedByTotalAmount * 100;
+                }
+                @Math.Round(percentageUserAmountDividedByTotalAmount, 2)
+            </td>
+            <td>
+                @{
+                var prizeShare = userAmountDividedByTotalAmount * ViewBag.FirstPrize;
+                }
+                @Math.Round(prizeShare, 2)
+            </td>
+        </tr>
+        }
+        }
+    </table>
+</div>
+
+<div class="col-md-1"></div>
+
+<div class="horizontalBarChart d-inline-block col-md-5"></div>
+<script src="https://d3js.org/d3.v4.min.js"></script>
+
+<script src="~/Scripts/horizontal-bar-chart.js"></script>
+
+<script>horizontalBarChart2();</script>

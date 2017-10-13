@@ -91,9 +91,10 @@
 <p>&nbsp;</p> 
 <p>&nbsp;</p>
 
+@*@Html.Partial("_PrizeShare")*@
 
 @* prize share table *@
-<div class="col-md-5"> 
+<div class="col-md-5">
     <table class="table">
         @{
             <tr>
@@ -144,24 +145,31 @@
 
 <div class="horizontalBarChart d-inline-block col-md-5"></div>
 
-<p>&nbsp;</p>
 
 
-@*<div class="ticketsPerUser d-inline-block col-md-6"></div>*@
 
+@* 
+    ****
+ScriptSection
+    ****
+*@
 
+@* d3 aster chart *@
 <script src="https://d3js.org/d3.v3.min.js"></script>
-<script src="https://d3js.org/d3.v4.min.js"></script>
-
 <script src="https://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
-
-
 <script src="~/Scripts/aster-graph.js"></script>
-<script src="~/Scripts/horizontal-bar-chart.js"></script>
+<script>asterGraph();</script>
 
-<script>
-    //barChart();
-    horizontalBarChart2();
-    asterGraph();
-</script>
+@* d3 Bar Chart *@
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<script src="~/Scripts/horizontal-bar-chart.js"></script>
+<script>horizontalBarChart2();</script>
+
+@* Highcharts *@
+@*<script src="https://code.highcharts.com/highcharts.js"></script>*@
+@*<div id="container" style="width:100%; height:400px;"></div>*@
+@*<script src="~/Scripts/highcharts-horizontal-bar-chart.js"></script>*@
+
+
+
 
