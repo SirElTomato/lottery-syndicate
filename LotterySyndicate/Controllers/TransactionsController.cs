@@ -74,15 +74,14 @@ namespace LotterySyndicate.Controllers
         public PartialViewResult ShowLastWeek()
         {
 
-            var previousWeekBuyDate = GetWeekConfiguration();
+            var previousWeekBuyDate = GetWeekConfiguration().AddDays(-7);
             var previousWeeklastBuyDate = previousWeekBuyDate.AddDays(-7);
             var result = (from t in db.Transactions
                           where t.BuyDate >= previousWeeklastBuyDate
                           where t.BuyDate <= previousWeekBuyDate
-                          select t);
+                          select t).ToList();
 
-
-            return PartialView("~/Views/Transactions/_ShowLastWeek.cshtml", result.ToList());
+            return PartialView("~/Views/Transactions/_ShowLastWeek.cshtml", result);
         }
 
         public ActionResult ShowAll()

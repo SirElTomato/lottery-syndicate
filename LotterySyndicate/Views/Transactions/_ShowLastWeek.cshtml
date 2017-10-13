@@ -23,22 +23,47 @@
         </th>
 
     </tr>
+    @{
+        var totalAmount = 0;
+        var totalCount = 0;
+
+
+    }
 
     @foreach (var item in Model)
-     {
+    {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.UserEmail)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.NumberOfTickets)
+                @{
+                    totalCount = totalCount + (int)item.NumberOfTickets;
+                }
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Amount)
+                £@Html.DisplayFor(modelItem => item.Amount)
+                @{
+                    totalAmount = totalAmount + (int)item.Amount;
+                }
+
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.TimeStamp)
             </td>
         </tr>
     }
+    <tr>
+        <td>
+            <b>Total</b>
+        </td>
+        <td>
+            <b>@totalCount</b>
+        </td>
+        <td>
+            <b>£@totalAmount</b>
+        </td>
+        <td></td>
+    </tr>
 </table>
