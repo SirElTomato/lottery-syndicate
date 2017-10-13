@@ -1,16 +1,11 @@
-﻿@model IEnumerable<LotterySyndicate.Models.Transaction>
+﻿
 
-@{
-    ViewBag.Title = "All Transactions";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
+@model IEnumerable<LotterySyndicate.Models.Transaction>
 
 
-@Html.Action("ShowThisWeek", "Transactions")
-@Html.Action("ShowLastWeek", "Transactions")
 
 
-<h2>All Transactions</h2>
+<h2>Last weeks transactions</h2>
 
 <table class="table">
     <tr>
@@ -26,11 +21,11 @@
         <th>
             @Html.DisplayNameFor(model => model.TimeStamp)
         </th>
-        
+
     </tr>
 
     @foreach (var item in Model)
-            {
+     {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.UserEmail)

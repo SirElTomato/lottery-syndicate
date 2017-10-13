@@ -11,16 +11,33 @@ namespace LotterySyndicate.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel;
 
     public partial class Transaction
     {
+
         public int TransactionID { get; set; }
-        [DisplayName("Name")]
         public string UserEmail { get; set; }
-        [DisplayName("Number of Tickets")]
         public Nullable<int> NumberOfTickets { get; set; }
-        [DisplayName("Amount (£)")]
         public Nullable<decimal> Amount { get; set; }
+        public Nullable<System.DateTime> TimeStamp { get; set; } = DateTime.Now;
+
+        public Nullable<System.DateTime> BuyDate { get; set; }
+
+        public Transaction()
+        {
+            var timestamp = DateTime.Now;
+            var daysSinceFriday = DayOfWeek.Friday - timestamp.DayOfWeek;
+            DateTime nextFriday = timestamp.AddDays(daysSinceFriday);
+            if (timestamp.DayOfWeek == DayOfWeek.Friday)
+            {
+                nextFriday = nextFriday.Date.AddDays(7);
+            }
+            else
+            {
+                nextFriday = nextFriday.Date;
+            }
+            this.BuyDate = nextFriday;
+        }
+
     }
 }

@@ -29,6 +29,8 @@
           <Property Name="UserEmail" Type="varchar" MaxLength="50" />
           <Property Name="NumberOfTickets" Type="int" />
           <Property Name="Amount" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="TimeStamp" Type="datetime" />
+          <Property Name="BuyDate" Type="datetime" />
         </EntityType>
         <EntityContainer Name="LotterySyndicateModelStoreContainer">
           <EntitySet Name="Prizes" EntityType="Self.Prizes" Schema="dbo" store:Type="Tables" />
@@ -55,6 +57,8 @@
           <Property Name="UserEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="NumberOfTickets" Type="Int32" />
           <Property Name="Amount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="TimeStamp" Type="DateTime" Precision="3" />
+          <Property Name="BuyDate" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityContainer Name="LotterySyndicateEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Tickets" EntityType="Self.Ticket" />
@@ -87,6 +91,8 @@
           <EntitySetMapping Name="Transactions">
             <EntityTypeMapping TypeName="LotterySyndicateModel.Transaction">
               <MappingFragment StoreEntitySet="Transactions">
+                <ScalarProperty Name="BuyDate" ColumnName="BuyDate" />
+                <ScalarProperty Name="TimeStamp" ColumnName="TimeStamp" />
                 <ScalarProperty Name="TransactionID" ColumnName="TransactionID" />
                 <ScalarProperty Name="UserEmail" ColumnName="UserEmail" />
                 <ScalarProperty Name="NumberOfTickets" ColumnName="NumberOfTickets" />

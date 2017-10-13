@@ -11,16 +11,11 @@ namespace LotterySyndicate.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel;
-
+    
     public partial class Prize
     {
-        [DisplayName("")]
         public int ID { get; set; }
-        [DisplayName("Prize")]
         public Nullable<decimal> Value { get; set; }
-        [DisplayName("Winning Number")]
-        public Nullable<int> WinningNumber { get; set; 
-}
+        public Nullable<int> WinningNumber { get; set; }
     }
 }

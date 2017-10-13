@@ -310,6 +310,8 @@
     <Content Include="Views\Prizes\Index.cshtml" />
     <Content Include="Views\Transactions\ShowAll.cshtml" />
     <Content Include="Views\Transactions\_PrizeShare.cshtml" />
+    <Content Include="Views\Transactions\_ShowThisWeek.cshtml" />
+    <Content Include="Views\Transactions\_ShowLastWeek.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

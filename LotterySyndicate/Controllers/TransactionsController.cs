@@ -15,7 +15,23 @@ namespace LotterySyndicate.Controllers
     public class TransactionsController : Controller
     {
         private LotterySyndicateEntities db = new LotterySyndicateEntities();
-       
+
+        public DateTime GetWeekConfiguration()
+        {
+            var timestamp = DateTime.Now;
+            var daysSinceFriday = DayOfWeek.Friday - timestamp.DayOfWeek;
+            DateTime nextFriday = timestamp.AddDays(daysSinceFriday);
+            if (timestamp.DayOfWeek == DayOfWeek.Friday)
+            {
+                nextFriday = nextFriday.Date.AddDays(7);
+            }
+            else
+            {
+                nextFriday = nextFriday.Date;
+            }
+
+            return nextFriday;
+        }
 
         // GET: Transactions
         public ActionResult Index()
@@ -41,9 +57,37 @@ namespace LotterySyndicate.Controllers
         
         }
 
+        public PartialViewResult ShowThisWeek()
+        {
+
+            var nextBuyDate = GetWeekConfiguration();
+            var lastBuyDate = nextBuyDate.AddDays(-7);
+            var result = (from t in db.Transactions
+                          where t.BuyDate >= lastBuyDate
+                          where t.BuyDate <= nextBuyDate
+                          select t);
+
+
+            return PartialView("~/Views/Transactions/_ShowThisWeek.cshtml", result.ToList());
+        }
+
+        public PartialViewResult ShowLastWeek()
+        {
+
+            var previousWeekBuyDate = GetWeekConfiguration();
+            var previousWeeklastBuyDate = previousWeekBuyDate.AddDays(-7);
+            var result = (from t in db.Transactions
+                          where t.BuyDate >= previousWeeklastBuyDate
+                          where t.BuyDate <= previousWeekBuyDate
+                          select t);
+
+
+            return PartialView("~/Views/Transactions/_ShowLastWeek.cshtml", result.ToList());
+        }
+
         public ActionResult ShowAll()
         {
-           
+
             return View(db.Transactions.ToList());
         }
 
@@ -62,32 +106,6 @@ namespace LotterySyndicate.Controllers
             return View(transaction);
         }
 
-
-        //public ActionResult GetTotals()
-        //{
-
-        //    //string query = "select sum(NumberOfTickets), sum(Amount) from dbo.Transactions group by UserEmail";
-        //    //var data = db.Transactions.SqlQuery(query);
-
-        //    var ticketsPerUser = from transaction in db.Transactions
-        //                         group transaction by transaction.UserEmail
-        //                         into individual
-        //                         select new
-        //                         {
-        //                             User = individual.Key,
-        //                             TicketCount = individual.Sum(x => x.NumberOfTickets),
-        //                             AmountCount = individual.Sum(x => x.Amount),
-        //                         };
-
-        //    return View(ticketsPerUser);
-        //    //return PartialView(data.ToList());
-        //}
-
-
-
-        
-
-    
 
         // GET: Transactions/Create
         public ActionResult Create()
